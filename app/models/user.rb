@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  has_secure_password
-  has_one :extrainfo
   has_one :diary, dependent: :destroy
   has_many :posts
   has_many :active_relationships, class_name: 'Relationship', foreign_key: "follower_id", dependent: :destroy

@@ -20,19 +20,19 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :extrainfos
-  end
-
-  resources :users do
     resources :posts
   end
 
   resources :users do
-    resources :followings
-  end
+    resources :followings_posts
+    end
 
   resources :users do
     resources :followers
+  end
+
+  resources :users do
+    resources :followings
   end
 
   resources :foods

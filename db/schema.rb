@@ -26,25 +26,10 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
   end
 
   create_table "diaries", force: :cascade do |t|
-    t.integer "user_id"
+    t.string "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_diaries_on_user_id"
-  end
-
-  create_table "extrainfos", force: :cascade do |t|
-    t.integer "age"
-    t.string "gender"
-    t.string "height"
-    t.string "weight"
-    t.string "target_weight"
-    t.integer "water"
-    t.integer "sport_time"
-    t.integer "daily_kcal"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_extrainfos_on_user_id"
   end
 
   create_table "food_days", force: :cascade do |t|
@@ -67,15 +52,15 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
     t.string "title"
     t.string "content"
     t.string "photo"
-    t.bigint "user_id", null: false
+    t.string "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+    t.string "follower_id"
+    t.string "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
@@ -83,12 +68,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "surname"
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.boolean "admin", default: false
+  create_table "users", id: :string, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -96,5 +76,4 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
   add_foreign_key "days", "diaries"
   add_foreign_key "food_days", "days"
   add_foreign_key "food_days", "foods"
-  add_foreign_key "posts", "users"
 end

@@ -8,12 +8,6 @@ class FollowersController < ApplicationController
     json_response(@followers)
   end
 
-  # POST /users/:user_id/followers
-  def create
-    @follower = Relationship.create!(relationship_params)
-    json_response(@follower, :created)
-  end
-
   # GET /users/:user_id/followers/:follower_id
   def show
     json_response(@follower)
@@ -32,11 +26,6 @@ class FollowersController < ApplicationController
   end
 
   private
-
-  def relationship_params
-    # whitelist params
-    params.permit(:follower_id, :followed_id).with_defaults(followed_id: @user.id)
-  end
 
   def set_user
     @user = User.find(params[:user_id])

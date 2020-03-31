@@ -18,7 +18,7 @@ class FollowingsPostsController < ApplicationController
     @posts = Post.joins("INNER JOIN users ON posts.user_id = users.id")
                  .select("posts.*, users.username, users.photo_profile")
                  .where(user_id: Relationship.where(follower_id: params[:user_id]).select("relationships.followed_id"))
-
+                 .reverse_order
   end
 
 end

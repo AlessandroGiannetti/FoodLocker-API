@@ -20,8 +20,9 @@ class PostsController < ApplicationController
 
   # PUT /users/:user_id/posts/:id
   def update
-    @post.update(item_params)
-    head :no_content
+    @post.write_attribute(:likes, @post.likes + 1)
+    @post.save
+    json_response(@post)
   end
 
   # DELETE /users/:user_id/posts/:id

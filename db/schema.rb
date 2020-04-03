@@ -20,15 +20,15 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
     t.integer "water"
     t.string "note"
     t.bigint "diary_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "created_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
+    t.string "updated_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
     t.index ["diary_id"], name: "index_days_on_diary_id"
   end
 
   create_table "diaries", force: :cascade do |t|
     t.string "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "created_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
+    t.string "updated_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
 
   create_table "foods", force: :cascade do |t|
     t.string "url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "created_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
+    t.string "updated_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
   end
 
   create_table "posts", force: :cascade do |t|
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
     t.string "photo"
     t.bigint "likes"
     t.string "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "created_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
+    t.string "updated_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
   create_table "users", id: :string, force: :cascade do |t|
     t.string "username", null: false
     t.string "photo_profile"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "created_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
+    t.string "updated_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
   end
 
   add_foreign_key "days", "diaries"

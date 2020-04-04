@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   private
 
   def item_params
-    params.permit(:content, :photoProfile, :likes)
+    params.permit(:content, :photo, :likes)
   end
 
   def set_user

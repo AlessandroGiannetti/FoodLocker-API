@@ -19,16 +19,21 @@ class FollowingsPostsController < ApplicationController
   end
 
   private
+
   def set_post
     @post = Post.find(params[:id])
   end
 
   def set_followers
+    @followings = Relationship.where(follower_id: params[:user_id]).select("relationships.followed_id")
 
     @posts = Post.joins("INNER JOIN users ON posts.user_id = users.id")
                  .select("posts.*, users.username, users.photo_profile")
-                 .where(user_id: Relationship.where(follower_id: params[:user_id]).select("relationships.followed_id"))
+                 .where("posts.user_id = ? OR posts.user_id IN (?)",
+                        params[:user_id],
+                        @followings)
                  .reverse_order
+
   end
 
 end

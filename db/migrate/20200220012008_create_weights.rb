@@ -3,6 +3,7 @@ class CreateWeights < ActiveRecord::Migration[6.0]
     create_table :weights do |t|
       t.string :weight
       t.string :photo
+      t.string :user_id
       t.timestamps
     end
     add_index :weights, :user_id

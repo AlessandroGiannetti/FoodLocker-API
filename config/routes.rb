@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    resources :weights
+  end
+
+  resources :users do
     resources :followings_posts
     end
 

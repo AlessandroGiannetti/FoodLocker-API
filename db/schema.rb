@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "weights", force: :cascade do |t|
+    t.string "weight"
+    t.string "photo"
+    t.string "user_id"
+    t.string "created_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
+    t.string "updated_at", null: false, default: Time.now.strftime("%H:%M %d/%m/%Y")
+    t.index ["user_id"], name: "index_weights_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.string "follower_id"
     t.string "followed_id"

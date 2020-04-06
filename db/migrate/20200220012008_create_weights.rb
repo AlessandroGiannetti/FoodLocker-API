@@ -1,4 +1,4 @@
-class CreatePosts < ActiveRecord::Migration[6.0]
+class CreateWeights < ActiveRecord::Migration[6.0]
   def change
     create_table :weights do |t|
       t.string :weight

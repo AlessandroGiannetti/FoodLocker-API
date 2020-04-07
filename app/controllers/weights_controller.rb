@@ -14,7 +14,7 @@ class WeightsController < ApplicationController
 
   # POST /users/:users_id/weights
   def create
-    @weight = @user.posts.create!(item_params)
+    @weight = @user.weight.create!(item_params)
     json_response(@weight, :created)
   end
 

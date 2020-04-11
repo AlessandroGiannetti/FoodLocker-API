@@ -13,11 +13,9 @@ class ResearchesController < ApplicationController
   private
 
   def set_users
-    @user = User.select("relationships.follower_id, users.id, users.username, users.photo_profile")
-                .joins("LEFT JOIN relationships ON relationships.followed_id = users.id")
-                .where("(relationships.follower_id = ? OR relationships.follower_id ~* ?) AND users.username ~* ?", params[:user_id], '.*', params[:id])
-                .uniq
 
+    @user = User.select("users.*")
+                .where("users.username ~* ?", params[:id]).uniq
 
   end
 end

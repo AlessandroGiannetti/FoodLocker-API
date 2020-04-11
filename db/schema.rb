@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_163543) do
     t.index ["user_id"], name: "index_weights_on_user_id"
   end
 
-  create_table "relationships"  do |t|
+  create_table "relationships", force: :cascade do |t|
     t.string "follower_id"
     t.string "followed_id"
     t.datetime "created_at", precision: 6, null: false

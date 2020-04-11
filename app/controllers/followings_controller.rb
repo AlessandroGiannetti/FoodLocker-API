@@ -27,7 +27,7 @@ class FollowingsController < ApplicationController
 
   # DELETE /user/:user_id/followings/:following_id
   def destroy
-    @user.destroy
+    Relationship.find_by(follower_id: @user.id, followed_id: params[:id])
     head :no_content
   end
 

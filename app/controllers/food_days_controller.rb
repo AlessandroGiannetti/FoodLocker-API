@@ -47,7 +47,7 @@ class FoodDaysController < ApplicationController
                     .select("food_days.id, food_days.meal, foods.*")
                     .where("food_days.day_id = ?", @day.id)
     
-    @day_food = [] if @day_food == NIL
+    @day_food = {} if @day_food == NIL
 
 
   end

@@ -46,6 +46,8 @@ class SportDaysController < ApplicationController
                      .select("sport_days.*, sports.*")
                      .where("sport_days.day_id = ?", @day.id)
 
+    @day_sport = {} if @day_sport == NIL
+
   end
 
 end

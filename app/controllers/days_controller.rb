@@ -43,6 +43,6 @@ class DaysController < ApplicationController
   def set_diary_day
     @day = Day.find_by(date: params[:id], diary_id: @diary.id) if @diary
 
-    @day = [] if @day == NIL
+    @day = {} if @day == NIL
   end
 end

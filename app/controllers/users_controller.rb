@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # POST /user
   def create
     @user = User.create!(user_params)
+    @user.diary = Diary.create
     json_response(@user, :created)
   end
 

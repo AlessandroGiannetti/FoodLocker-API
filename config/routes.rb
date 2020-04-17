@@ -2,21 +2,21 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resources :users do
-    resources :diaries do
-      resources :days do
-        resources :food_days do
-          resources :foods
-        end
+    resources :diaries
+  end
+
+  resources :users do
+    resources :days do
+      resources :food_days do
+        resources :foods
       end
     end
   end
 
   resources :users do
-    resources :diaries do
-      resources :days do
-        resources :sport_days do
-          resources :sports
-        end
+    resources :days do
+      resources :sport_days do
+        resources :sports
       end
     end
   end

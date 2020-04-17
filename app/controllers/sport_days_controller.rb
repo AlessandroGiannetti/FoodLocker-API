@@ -1,6 +1,6 @@
 class SportDaysController < ApplicationController
-  before_action :set_day
-  before_action :set_day_sport, only: [:index, :show, :update, :destroy]
+  before_action :set_day_diary
+  before_action :set_day_sport
 
   # GET /days/:day_id/sport_days/
   def index
@@ -36,14 +36,16 @@ class SportDaysController < ApplicationController
     params.permit(:day_id, :sport_id, :hour)
   end
 
-  def set_day
-    @day = Day.find(params[:day_id])
+  def set_day_diary
+    @diary = Diary.find_by(user_id: params[:user_id])
+    @day = Day.find_by(date: params[:day_id])
   end
 
   def set_day_sport
     @day_sport = Sport.joins("INNER JOIN sport_days ON sports.id = sport_days.sport_id")
-                    .select("sport_days.*, sports.*")
-                    .where("sport_days.day_id = ?", params[:day_id])
+                     .select("sport_days.*, sports.*")
+                     .where("sport_days.day_id = ?", @day.id)
+
   end
 
 end

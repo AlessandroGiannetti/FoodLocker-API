@@ -37,11 +37,10 @@ class DaysController < ApplicationController
   end
 
   def set_diary
-    @diary = Diary.find(params[:diary_id])
+    @diary = Diary.find_by(user_id: params[:user_id])
   end
 
   def set_diary_day
-    @days = @diary.days.find_by!(id: params[:id]) if @diary
-    @day = Day.find(params[:id]) if @diary
+    @day = Day.find_by(date: params[:id], diary_id: @diary.id) if @diary
   end
 end

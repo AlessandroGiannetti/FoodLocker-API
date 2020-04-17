@@ -26,7 +26,7 @@ class DaysController < ApplicationController
 
   # DELETE /diaries/:diary_id/days/:id
   def destroy
-    @day.find_by(id: params[:id]).destroy
+    @diary.days.find_by(id: params[:id]).destroy if @diary
     head :no_content
   end
 

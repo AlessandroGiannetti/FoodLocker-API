@@ -41,7 +41,12 @@ class FoodDaysController < ApplicationController
   end
 
   def set_day_food
-    @day_food = @day.food_days.find(params[:id]) if @day
+
+    @day_food = Food.joins("INNER JOIN food_days ON foods.id = food_days.food_id")
+                    .select("food_days.id, food_days.meal, foods.*")
+                    .where("foods.id = ?", params[:id])
+
+
   end
 
 end

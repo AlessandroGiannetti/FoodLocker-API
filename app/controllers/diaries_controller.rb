@@ -41,7 +41,7 @@ class DiariesController < ApplicationController
   end
 
   def set_user_diary
-    @diary = @user.diary.find_by!(id: params[:id]) if @user
+    @diary = Diary.find(params[:id]) if @user
   end
 end
 

@@ -11,9 +11,25 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users do
+    resources :diaries do
+      resources :days do
+        resources :sport_days do
+          resources :sports
+        end
+      end
+    end
+  end
+
   resources :diaries do
     resources :days do
       resources :food_days
+    end
+  end
+
+  resources :diaries do
+    resources :days do
+      resources :sport_days
     end
   end
 
@@ -35,7 +51,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :followings_posts
-    end
+  end
 
   resources :users do
     resources :followers
@@ -46,4 +62,7 @@ Rails.application.routes.draw do
   end
 
   resources :foods
+
+  resources :sports
+
 end

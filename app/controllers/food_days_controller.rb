@@ -38,7 +38,7 @@ class FoodDaysController < ApplicationController
 
   def set_day_diary
     @diary = Diary.find_by(user_id: params[:user_id])
-    @day = Day.find_by(date: params[:day_id])
+    @day = Day.find_by(date: params[:day_id], diary_id: @diary.id)
   end
 
   def set_day_food

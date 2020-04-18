@@ -62,7 +62,9 @@ Rails.application.routes.draw do
   end
 
   resources :foods
+  resources :foods_id
 
   resources :sports
+  resources :sports_id
 
 end

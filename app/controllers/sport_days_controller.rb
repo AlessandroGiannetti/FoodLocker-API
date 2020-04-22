@@ -1,6 +1,6 @@
 class SportDaysController < ApplicationController
-  before_action :set_day_diary, only: [:show, :index]
-  before_action :set_day_sport, only: [:show, :index]
+  before_action :set_day_diary, only: [:show, :index, :create]
+  before_action :set_day_sport, only: [:show, :index, :create]
   before_action :set_elem_by_id, only: [:update, :destroy]
 
   # GET /days/:day_id/sport_days/
@@ -45,8 +45,8 @@ class SportDaysController < ApplicationController
 
   def set_day_sport
     @day_sport_join = Sport.joins("INNER JOIN sport_days ON sports.id = sport_days.sport_id")
-                     .select("sport_days.*, sports.*")
-                     .where("sport_days.day_id = ?", @day.id)
+                          .select("sport_days.*, sports.*")
+                          .where("sport_days.day_id = ?", @day.id)
 
     @day_sport_join = {} if @day_sport_join == NIL
 

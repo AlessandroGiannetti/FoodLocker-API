@@ -1,6 +1,6 @@
 class FoodDaysController < ApplicationController
-  before_action :set_day_diary, only: [:show, :index]
-  before_action :set_day_food_join, only: [:show, :index]
+  before_action :set_day_diary, only: [:show, :index, :create]
+  before_action :set_day_food_join, only: [:show, :index, :create]
   before_action :set_elem_by_id, only: [:update, :destroy]
 
   # GET /days/:day_id/food_days/

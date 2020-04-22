@@ -42,6 +42,6 @@ class PostsController < ApplicationController
   end
 
   def set_user_post
-    @post = @user.posts.find_by!(id: params[:id]) if @user
+    @post = @user.posts.find_by!(id: params[:id]).reverse_order if @user
   end
 end

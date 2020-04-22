@@ -25,8 +25,9 @@ class SportDaysController < ApplicationController
   end
 
   # DELETE /diaries/:diary_id/days/:id
+  # use carefully
   def destroy
-    @day_sport.destroy
+    @day.destroy
     head :no_content
   end
 

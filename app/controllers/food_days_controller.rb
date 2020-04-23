@@ -1,22 +1,21 @@
 class FoodDaysController < ApplicationController
-  before_action :set_day_diary, only: [:show, :index, :create]
-  before_action :set_day_food_join, only: [:show, :index, :create]
-  before_action :set_elem_by_id, only: [:update, :destroy]
+  before_action :set_day_diary
+  before_action :set_day_food
 
   # GET /days/:day_id/food_days/
   def index
-    json_response(@day_food_join)
+    json_response(@day_food)
   end
 
   # GET /days/:day_id/day_foods/:id
   def show
-    json_response(@day_food_join)
+    json_response(@day_food)
   end
 
   # POST /diaries/:diary_id/days
   def create
-    @day_food_join = @day.food_days.create!(day_food_params)
-    json_response(@day_food_join, :created)
+    @day_food = @day.food_days.create!(day_food_params)
+    json_response(@day_food, :created)
   end
 
   # PUT /diaries/:diary_id/days/:id
@@ -34,7 +33,7 @@ class FoodDaysController < ApplicationController
   private
 
   def day_food_params
-    params.permit(:day_id, :food_id, :meal, :user_id, :id)
+    params.permit(:day_id, :food_id, :meal)
   end
 
   def set_day_diary
@@ -42,16 +41,13 @@ class FoodDaysController < ApplicationController
     @day = Day.find_by(date: params[:day_id], diary_id: @diary.id)
   end
 
-  def set_day_food_join
-    @day_food_join = Food.joins("INNER JOIN food_days ON foods.id = food_days.food_id")
-                         .select("food_days.id, food_days.meal, foods.*")
-                         .where("food_days.day_id = ?", @day.id)
-    @day_food_join = {} if @day_food_join == NIL
-  end
+  def set_day_food
 
-  def set_elem_by_id
-    @day_food = FoodDay.find(params[:id])
-  end
+    @day_food = Food.joins("INNER JOIN food_days ON foods.id = food_days.food_id")
+                    .select("food_days.id, food_days.meal, foods.*")
+                    .where("food_days.day_id = ?", @day.id)
 
+    @day_food = {} if @day_food == NIL
+  end
 
 end

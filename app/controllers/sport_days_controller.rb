@@ -20,13 +20,13 @@ class SportDaysController < ApplicationController
 
   # PUT /diaries/:diary_id/days/:id
   def update
-    @day_sport.update(day_sport_params)
+    SportDay.find_by(id: params[:id]).update(day_sport_params)
     head :no_content
   end
 
   # DELETE /diaries/:diary_id/days/:id
   def destroy
-    @day_sport.destroy
+    SportDay.find_by(id: params[:id]).destroy
     head :no_content
   end
 

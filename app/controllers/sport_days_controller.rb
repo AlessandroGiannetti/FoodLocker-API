@@ -33,7 +33,7 @@ class SportDaysController < ApplicationController
   private
 
   def day_sport_params
-    params.permit(:day_id, :sport_id, :hour)
+    params.permit(:day_id, :sport_id, :hour, :id)
   end
 
   def set_day_diary

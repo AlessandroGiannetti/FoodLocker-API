@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
   # PUT /users/:user_id/posts/:id
   def update
-    @post.write_attribute(:likes, @post.likes + 1)
+    Post.find_by(id: params[:id]).write_attribute(:likes, @post.likes + 1)
     @post.save
     json_response(@post)
   end
@@ -42,6 +42,6 @@ class PostsController < ApplicationController
   end
 
   def set_user_post
-    @post = @user.posts.find_by!(id: params[:id]).reverse_order if @user
+    @post = @user.posts.reverse_order if @user
   end
 end

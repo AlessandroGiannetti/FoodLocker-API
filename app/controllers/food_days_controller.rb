@@ -46,10 +46,8 @@ class FoodDaysController < ApplicationController
     @day_food = Food.joins("INNER JOIN food_days ON foods.id = food_days.food_id")
                     .select("food_days.id, food_days.meal, foods.*")
                     .where("food_days.day_id = ?", @day.id)
-    
+
     @day_food = {} if @day_food == NIL
-
-
   end
 
 end

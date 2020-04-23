@@ -1,15 +1,15 @@
 class PostsController < ApplicationController
   before_action :set_user
-  before_action :set_user_post, only: [:show, :update, :index]
+  before_action :set_user_post, only: [:update, :index]
 
   # GET /users/:user_id/posts
   def index
-    json_response(@user.posts.reverse_order)
+    json_response(@post)
   end
 
   # GET /users/:user_id/posts/:id
   def show
-    json_response(@post)
+    json_response(Post.find_by(id: params[:id]))
   end
 
   # POST /users/:users_id/posts
@@ -42,6 +42,6 @@ class PostsController < ApplicationController
   end
 
   def set_user_post
-    @post = @user.posts.find_by!(id: params[:id]) if @user
+    @post = @user.posts.find_by!(id: params[:id]).reverse_order if @user
   end
 end

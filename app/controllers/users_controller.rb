@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :index]
 
   # GET /users
   def index
     @users = User.all
-    json_response(@users)
+    json_response(@response)
   end
 
   # POST /user
@@ -35,10 +35,11 @@ class UsersController < ApplicationController
 
   def user_params
     # whitelist params
-    params.permit(:id, :username, :photo_profile)
+    params.permit(:id, :username, :photo_profile, :token)
   end
 
   def set_user
     @user = User.find(params[:id])
+    @response = FirebaseIdToken::Signature.verify(params[:token])
   end
 end

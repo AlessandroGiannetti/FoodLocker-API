@@ -16,12 +16,20 @@ class AuthorizeApiRequest
   attr_reader :headers
 
   def user
-    @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
-    @user || errors.add(:token, 'Invalid token') && nil
+    if decoded_auth_token.nil?
+      errors.add(:token, 'Invalid token')
+    else
+      @user ||= User.find(decoded_auth_token[:user_id])
+      if @user.nil?
+        User.create!(id: @decoded_auth_token[:user_id],
+                     username: @decoded_auth_token[:name],
+                     photo_profile: @decoded_auth_token[:picture])
+      end
+    end
   end
 
   def decoded_auth_token
-    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+    @decoded_auth_token ||= FirebaseIdToken::Signature.verify(http_auth_header)
   end
 
   def http_auth_header

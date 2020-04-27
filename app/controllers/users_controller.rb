@@ -3,8 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-
-    json_response(FirebaseIdToken::Signature.verify(params[:token]))
+    headers :no_content
   end
 
   # POST /user
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    json_response(FirebaseIdToken::Signature.verify(params[:token]))
+    json_response(@user)
   end
 
   # PUT /user/:id
@@ -32,6 +31,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     # whitelist params
     params.permit(:id, :username, :photo_profile, :token)

@@ -17,7 +17,7 @@ class AuthorizeApiRequest
 
   def user
     if decoded_auth_token.nil?
-      errors.add(:token, 'Invalid token')
+      errors.add(:token, 'Missing or Invalid token')
     else
       @user ||= User.find(decoded_auth_token[:user_id])
       if @user.nil?
